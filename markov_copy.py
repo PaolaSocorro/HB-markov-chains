@@ -1,31 +1,32 @@
-import sys
-
 corpus = open("green-eggs.txt")
-#corpus.read()
 def make_chains(corpus):
     text = corpus.read()
     """Takes input text as string; returns dictionary of markov chains."""
     random_dict = {}
     text = text.replace('/n',' ')
-    print text
     words = text.split()
 
     i = 0
-    while i < (len(words) - 1):
+
+    while i < (len(words) - 2):
         keys = []
         keys.append(words[i])
         keys.append(words[i+1])
-        random_dict[tuple(keys)] = None
-        i += 1
-        print keys
-    print random_dict    
+        third_word = words[i+2]
+        tuple_key = tuple(keys)
 
 
+        if tuple_key not in random_dict:
+            random_dict[tuple_key] = [third_word]
+
+        else:
+            random_dict[tuple_key].append(third_word)
+
+        i += 1    
 
 
+    return random_dict    
 
-
-    return {}
 
 
 def make_text(chains):
