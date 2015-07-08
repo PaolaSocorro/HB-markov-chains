@@ -1,4 +1,6 @@
-corpus = open("green-eggs.txt")
+import random
+
+opened_file = open("green-eggs.txt")
 def make_chains(corpus):
     text = corpus.read()
     """Takes input text as string; returns dictionary of markov chains."""
@@ -29,8 +31,12 @@ def make_chains(corpus):
 
 
 
-def make_text(chains):
+def make_text(dict_chains):
     """Takes dictionary of markov chains; returns random text."""
+
+    random.choice(dict_chains.keys())
+    
+    
 
     return "Here's some random text."
 
@@ -39,12 +45,12 @@ def make_text(chains):
 # be used by examining the `sys.argv` arguments (if neccessary, see the
 # Python docs for sys.argv)
 
-make_chains(corpus)
+make_chains(opened_file)
 
 #input_text = "Some text"
 
 # Get a Markov chain
-chain_dict = make_chains(input_text)
+chain_dict = make_chains(opened_file)
 
 # Produce random text
 random_text = make_text(chain_dict)
