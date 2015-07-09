@@ -40,7 +40,7 @@ def make_text(chain_dict):
     """Takes dictionary of markov chains; returns random text."""
     
     # loop - while rand_key in chain_dict:
-    rand_key = random.choice(chain_dict.keys())
+    rand_key = ("Would","you,")
     text_random = rand_key[0] + " " + rand_key[1]
     while rand_key in chain_dict:
         #string_key = rand_key[0] + " " + rand_key[1]
@@ -51,7 +51,7 @@ def make_text(chain_dict):
 
         rand_key = (rand_key[1],new_word)
 
-    print text_random
+    #print text_random
 
 
     # print rand_key, next_word_list
@@ -63,7 +63,7 @@ def make_text(chain_dict):
     
     
 
-    return "Here's some random text."
+    return text_random
 
 
 # Change this to read input_text from a file, deciding which file should
