@@ -72,11 +72,29 @@ class SimpleMarkovGenerator(object):
         return text_random    
 
 
-# class TweetableMarkovGenerator(SimpleMarkovGenerator):
-#     def limit_140char(self, full_text):
-#         """ Takes generated random text and limits it to
-#         the last full sentence before 140 characters."""
-        
+class TweetableMarkovGenerator(SimpleMarkovGenerator):
+
+    def limit_140char(self, full_text):
+        """ Takes generated random text and limits it to
+        the last full sentence before 140 characters."""
+
+        tweet_text = full_text[0:138]
+        punctuations = [".","!","?"]
+
+        for char in tweet_text:
+            if char[-1] in punctuations:
+                return tweet_text
+            elif char[-1] == [" "]:
+                tweet_text = tweet_text[-1].replace(".")
+                return tweet_text  
+            else:
+                tweet_text = tweet_text[0:-1]
+        #return tweet_text
+
+      # def add_punctuation(self, tweet_text):
+      #   """ Adds punctuation to text """
+
+      #it custs off too far in.
 
         
 
@@ -106,7 +124,15 @@ if __name__ == "__main__":
     chain_dict = generator.make_chains(text)
     random_text = generator.make_text(chain_dict)
 
-    print random_text
+    #print random_text
+
+    tweet_gen = TweetableMarkovGenerator()
+    our_tweet = tweet_gen.limit_140char(random_text)
+    print "\n"
+    print "#############################################"
+    print "\n"
+    print our_tweet
+
 
     # we should get list of filenames from sys.argv
     # we should make an instance of the class
