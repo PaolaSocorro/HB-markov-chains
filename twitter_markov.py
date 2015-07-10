@@ -1,6 +1,7 @@
 import sys
 import random
-
+import os
+import twitter
 
 
 class SimpleMarkovGenerator(object):
@@ -61,7 +62,7 @@ class SimpleMarkovGenerator(object):
                 break
 
         text_random = rand_key[0] + " " + rand_key[1]
-        while rand_key in chain_dict:
+        while rand_key in chain_dict and len(text_random) <140:
             next_word_list = chain_dict[rand_key]
             new_word = random.choice(next_word_list)            
 
@@ -69,6 +70,7 @@ class SimpleMarkovGenerator(object):
             
             rand_key = (rand_key[1], new_word)
             
+            #print len(text_random)
         return text_random    
 
 
