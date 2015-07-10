@@ -32,6 +32,8 @@ def make_chains(working_filename):
 
     corpus.close()
 
+
+
     return random_dict    
 
 
@@ -40,30 +42,26 @@ def make_text(chain_dict):
     """Takes dictionary of markov chains; returns random text."""
     
     # loop - while rand_key in chain_dict:
-    rand_key = ("Would","you,")
-    text_random = rand_key[0] + " " + rand_key[1]
+    rand_key = random.choice(chain_dict.keys())
+    #text_random = rand_key[0] + " " + rand_key[1]
+    text_random = "Would you, "
+
     while rand_key in chain_dict:
         #string_key = rand_key[0] + " " + rand_key[1]
         next_word_list = chain_dict[rand_key]
         new_word = random.choice(next_word_list) 
-
-        text_random = text_random + " " + new_word 
-
+        
+        if new_word[-1] == "?":
+            text_random = text_random + " " + new_word + "\n"
+        else:
+            text_random = text_random + " " + new_word 
+        
         rand_key = (rand_key[1],new_word)
 
-    #print text_random
-
-
-    # print rand_key, next_word_list
-
-    # print " "
-
-    # print string_key, new_word 
-
-    
-    
 
     return text_random
+
+
 
 
 # Change this to read input_text from a file, deciding which file should
@@ -71,8 +69,6 @@ def make_text(chain_dict):
 # Python docs for sys.argv)
 
 make_chains(working_filename)
-
-#input_text = "Some text"
 
 # Get a Markov chain
 chain_dict = make_chains(working_filename)
