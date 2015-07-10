@@ -78,18 +78,19 @@ class TweetableMarkovGenerator(SimpleMarkovGenerator):
         """ Takes generated random text and limits it to
         the last full sentence before 140 characters."""
 
-        tweet_text = full_text[0:138]
+        tweet_text = full_text[0:140]
         punctuations = [".","!","?"]
 
-        for char in tweet_text:
-            if char[-1] in punctuations:
-                return tweet_text
-            elif char[-1] == [" "]:
-                tweet_text = tweet_text[-1].replace(".")
-                return tweet_text  
-            else:
-                tweet_text = tweet_text[0:-1]
-        #return tweet_text
+        
+        if tweet_text[-1] in punctuations:
+            return tweet_text
+        elif tweet_text[-1] == [" "] or tweet_text[-1] == [","]:
+            tweet_text = tweet_text[-1].replace(".")
+            return tweet_text  
+        else:
+            space_index = tweet_text.rfind(" ")
+            tweet_text = tweet_text[:space_index] + "."
+            return tweet_text
 
       # def add_punctuation(self, tweet_text):
       #   """ Adds punctuation to text """
